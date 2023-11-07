@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33306,
+            "driver": "MySQL",
+            "name": "inventario",
+            "database": "inventario",
+            "username": "root",
+            "password": "zx76wbz7FG89k"
+        }
+    ]
+}
