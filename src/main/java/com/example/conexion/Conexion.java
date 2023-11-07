@@ -27,7 +27,7 @@ public class Conexion {
         // Vía JDBC
         if (conn == null) {
             try (FileInputStream fis = new FileInputStream("db.properties")) {
-                // Class.forName("com.mysql.jdbc.Driver");
+                // Class.forName("com.mysql.jdbc.Driver"); No lo necesitmos porque ya tenemos el fichero de propiedades
                 prop = new Properties();
                 prop.load(fis);
                 this.conn = DriverManager.getConnection(

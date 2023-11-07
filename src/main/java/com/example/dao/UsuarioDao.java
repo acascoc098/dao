@@ -18,6 +18,7 @@ public class UsuarioDao {
     //No puedo cambiar el id
     public Usuario update(int idOldUser, Usuario usuario);
     public Usuario update(int idOldUser, Usuario usuario);
+
     //Borrado por id u objaeto
     public Usuario delete(int idUsuario);
     public Usuario delete(Usuario usuario);

@@ -4,13 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.example.conexion.Conexion;
+
 public class App {
     public static void main(String[] args) throws Exception {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String jdbcUrl = "jdbc:mysql://localhost:33306/inventario";
-            Connection com = DriverManager.getConnection(jdbcUrl,"root", "zx76wbz7FG89k");
+            //Connection com = DriverManager.getConnection(jdbcUrl,"root", "zx76wbz7FG89k");
 
+            Conexion cone = new Conexion();
+            Connection con = cone.getConnection("");
             if (com != null) {
                 System.out.println("Conectado correctamente");
 
