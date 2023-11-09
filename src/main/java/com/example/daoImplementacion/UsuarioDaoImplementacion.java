@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.conexion.Conexion;
+import com.example.dao.UsuarioDao;
 import com.example.modelos.Usuario;
 
 public class UsuarioDaoImplementacion implements UsuarioDao {

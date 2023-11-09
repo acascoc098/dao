@@ -1,10 +1,8 @@
-package com.iesvdc.acceso.inventario.modelo;
+package com.example.modelos;
 
 import java.util.Objects;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="usuario")
 public class Usuario {
     private int id;
     private String username;

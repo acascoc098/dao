@@ -2,29 +2,29 @@ package com.example.dao;
 
 import java.util.List;
 
+import com.example.modelos.Instalacion;
 import com.example.modelos.Usuario;
 
-public class UsuarioDao {
-    //el id se autogenera, por eso quiero el objeto nuevo para saber el id real
+public class InstalacionDao {
     /**
      * Al insertar como el id es un AUTO_Increment, lo gestiona la BBDD
      * @param u Usuario para añadir a la BBDD
      * @return El mismo usuario pero con el id real
      */
-    public Usuario create(Usuario u);
+    public Instalacion create(Usuario u);
 
     /**
      * Buscar todos. 
      * @return devuelve una lista con todos los usuarios de la BBDD
      */
-    public List<Usuario> findAll();
+    public List<Instalacion> findAll();
     
     /**
      * Devuelve el usuario con ID=id de la BBDD y si no está, devuelve null
      * @param id el ID de usuario
      * @return el usuario o NULL si no está
      */
-    public Usuario findById(int id);
+    public Instalacion findById(int id);
 
     /**
      * Devuelve el usuario con USERNAME=username de la BBDD y si no está, devuelve null.
@@ -32,15 +32,8 @@ public class UsuarioDao {
      * @param username el nombre de usuario
      * @return el usuario o NULL si lo encuentra
      */
-    public Usuario findByUsername(String username);
+    public Instalacion findByNombre(String nombre);
     
-    /**
-     * Devuelve el usuario con EMAIL=email de la BBDD y si no está, devuelve null. 
-     * El EMAIL es único y no se puede repetir.
-     * @param email la dirección de correo del usuario a buscar
-     * @return el usuario o NULL si lo encuentra
-     */
-    public Usuario findByEmail(String email);
     
     /**
      * Actualiza, si existe, si no, lo crea
@@ -48,10 +41,9 @@ public class UsuarioDao {
      * no puedo cambiar el ID
      * @return newUser
      * */    
-    public Usuario update(int idOldUser, Usuario newUser);
-    public Usuario update(Usuario oldUser, Usuario newUser);
+    public Instalacion update(int idOldInstalacion, Instalacion newInstalacion);
+    public Instalacion update(Instalacion oldInstalacion, Instalacion newInstalacion);
     
-    public Usuario delete(int idUsuario);
-    public Usuario delete(Usuario usuario);
-
+    public Instalacion delete(int idOldInstalacion);
+    public Instalacion delete(Instalacion instalacion);
 }
