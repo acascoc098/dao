@@ -101,9 +101,66 @@ public class UsuarioDaoImplementacion implements UsuarioDao {
         return u;
     };
 
-    public Usuario findByUsername(String username);
-    public Usuario findByEmail(String email);
-    public Usuario update(int idOldUser, Usuario usuario);
+    public Usuario findByUsername(String username){
+        com.iesvdc.acceso.inventario.modelo.Usuario u = null;
+
+        try {
+            Conexion con = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE id = ?";
+            PreparedStatement ps = con.getConnection.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.execute();
+
+            while (rs.next()) {
+                u = new Usuario(rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("email"),
+                    rs.getInt("telefono"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return u;
+    };
+
+    public Usuario findByEmail(String email){
+        com.iesvdc.acceso.inventario.modelo.Usuario u = null;
+
+        try {
+            Conexion con = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE id = ?";
+            PreparedStatement ps = con.getConnection.prepareStatement(sql);
+            ps.setString(1, email);
+
+            ResultSet rs = ps.execute();
+
+            while (rs.next()) {
+                u = new Usuario(rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("email"),
+                    rs.getInt("telefono"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return u;
+    };
+
+
+    public Usuario update(int idOldUser, Usuario usuario){
+        
+    };
     public Usuario update(int idOldUser, Usuario usuario);
     public Usuario delete(int idUsuario);
     public Usuario delete(Usuario usuario);

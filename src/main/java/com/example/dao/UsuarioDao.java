@@ -31,7 +31,18 @@ public class UsuarioDao {
      * @return
      */
     public Usuario findById(int id);
+    /**
+     * 
+     * @param username
+     * @return
+     */
     public Usuario findByUsername(String username);
+    /**
+     * Devuelve el usuario con EMAIL = email
+     * El email es único y no se puede repetir
+     * @param email
+     * @return usuario o NULL si lo encuentra
+     */
     public Usuario findByEmail(String email);
 
     /**
