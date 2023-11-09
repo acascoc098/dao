@@ -6,21 +6,26 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="usuario")
 public class Usuario {
-    int id;
-    String username;
-    String password;
-    String tipo;
-    String email;
+    private int id;
+    private String username;
+    private String password;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private int telefono;
+
 
     public Usuario() {
     }
 
-    public Usuario(int id, String username, String password, String tipo, String email) {
+    public Usuario(int id, String username, String password, String nombre, String apellido, String email, int telefono) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.tipo = tipo;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -47,12 +52,20 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getTipo() {
-        return this.tipo;
+    public String getNombre() {
+        return this.nombre;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return this.apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getEmail() {
@@ -61,6 +74,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getTelefono() {
+        return this.telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     public Usuario id(int id) {
@@ -78,13 +99,23 @@ public class Usuario {
         return this;
     }
 
-    public Usuario tipo(String tipo) {
-        setTipo(tipo);
+    public Usuario nombre(String nombre) {
+        setNombre(nombre);
+        return this;
+    }
+
+    public Usuario apellido(String apellido) {
+        setApellido(apellido);
         return this;
     }
 
     public Usuario email(String email) {
         setEmail(email);
+        return this;
+    }
+
+    public Usuario telefono(int telefono) {
+        setTelefono(telefono);
         return this;
     }
 
@@ -96,25 +127,25 @@ public class Usuario {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return id == usuario.id && Objects.equals(username, usuario.username)
-                && Objects.equals(password, usuario.password) && Objects.equals(tipo, usuario.tipo)
-                && Objects.equals(email, usuario.email);
+        return id == usuario.id && Objects.equals(username, usuario.username) && Objects.equals(password, usuario.password) && Objects.equals(nombre, usuario.nombre) && Objects.equals(apellido, usuario.apellido) && Objects.equals(email, usuario.email) && telefono == usuario.telefono;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, tipo, email);
+        return Objects.hash(id, username, password, nombre, apellido, email, telefono);
     }
 
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
-                ", username='" + getUsername() + "'" +
-                ", password='" + getPassword() + "'" +
-                ", tipo='" + getTipo() + "'" +
-                ", email='" + getEmail() + "'" +
-                "}";
+            " id='" + getId() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", apellido='" + getApellido() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", telefono='" + getTelefono() + "'" +
+            "}";
     }
 
 }
