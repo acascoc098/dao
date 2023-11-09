@@ -2,7 +2,7 @@ package com.example.dao;
 
 import java.util.List;
 
-import com.iesvdc.acceso.inventario.modelos.Usuario;
+import com.iesvdc.acceso.inventario.modelo.Usuario;
 
 public class UsuarioDao {
     //el id se autogenera, por eso quiero el objeto nuevo para saber el id real
@@ -14,47 +14,44 @@ public class UsuarioDao {
     public Usuario create(Usuario u);
 
     /**
-     * 
-     * @return Lista con todoos los usuarios de la base
+     * Buscar todos. 
+     * @return devuelve una lista con todos los usuarios de la BBDD
      */
     public List<Usuario> findAll();
-
+    
     /**
-     * 
-     * @param nombre
-     * @return
-     */
-    public List<Usuario> findByNombre(String nombre);
-    /**
-     * 
-     * @param id
-     * @return
+     * Devuelve el usuario con ID=id de la BBDD y si no está, devuelve null
+     * @param id el ID de usuario
+     * @return el usuario o NULL si no está
      */
     public Usuario findById(int id);
+
     /**
-     * 
-     * @param username
-     * @return
+     * Devuelve el usuario con USERNAME=username de la BBDD y si no está, devuelve null.
+     * El USERNAME es único y no se puede repetir.
+     * @param username el nombre de usuario
+     * @return el usuario o NULL si lo encuentra
      */
     public Usuario findByUsername(String username);
+    
     /**
-     * Devuelve el usuario con EMAIL = email
-     * El email es único y no se puede repetir
-     * @param email
-     * @return usuario o NULL si lo encuentra
+     * Devuelve el usuario con EMAIL=email de la BBDD y si no está, devuelve null. 
+     * El EMAIL es único y no se puede repetir.
+     * @param email la dirección de correo del usuario a buscar
+     * @return el usuario o NULL si lo encuentra
      */
     public Usuario findByEmail(String email);
-
+    
     /**
-     * Actualiza si existe, si no, lo crea
-     * Al crearlo el id ¡cambia! (AUTO_INCREMENT)
-     * No puedo cambiar el id
+     * Actualiza, si existe, si no, lo crea
+     * si lo crea, el ID ¡¡cambia!! (AUTO_INCREMENT)
+     * no puedo cambiar el ID
      * @return newUser
-     **/
-    public Usuario update(int idOldUser, Usuario usuario);
-    public Usuario update(int idOldUser, Usuario usuario);
-
-    //Borrado por id u objaeto
+     * */    
+    public Usuario update(int idOldUser, Usuario newUser);
+    public Usuario update(Usuario oldUser, Usuario newUser);
+    
     public Usuario delete(int idUsuario);
     public Usuario delete(Usuario usuario);
+
 }

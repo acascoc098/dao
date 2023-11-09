@@ -47,121 +47,191 @@ public class UsuarioDaoImplementacion implements UsuarioDao {
     };
 
     public List<Usuario> findAll(){
-        List<com.iesvdc.acceso.inventario.modelo.Usuario> usuarios = new ArrayList<com.iesvdc.acceso.inventario.modelo.Usuario>();
+        List<Usuario> lUsuarios = new ArrayList<Usuario>();
 
         try {
-            Conexion con = new Conexion();
+            Conexion conexion = new Conexion();
             String sql = "SELECT * FROM usuario";
-            PreparedStatement ps = con.getConnection.prepareStatement(sql);
-            ResultSet rs = ps.execute();
-
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Usuario u = new Usuario(rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getString("email"),
+                Usuario u = new Usuario(
+                    rs.getInt("id"), 
+                    rs.getString("username"), 
+                    rs.getString("password"), 
+                    rs.getString("nombre"), 
+                    rs.getString("apellido"), 
+                    rs.getString("email"), 
                     rs.getInt("telefono"));
-
-                usuarios.add(u);
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    };
-
-    public List<Usuario> findByNombre(String nombre);
-
-    public Usuario findById(int id){
-        com.iesvdc.acceso.inventario.modelo.Usuario u = null;
-
-        try {
-            Conexion con = new Conexion();
-            String sql = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = con.getConnection.prepareStatement(sql);
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.execute();
-
-            while (rs.next()) {
-                u = new Usuario(rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getString("email"),
-                    rs.getInt("telefono"));
-
+                lUsuarios.add(u);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return lUsuarios;
 
+    };
+
+    public List<Usuario> findByNombre(String nombre){
+        Usuario u=null;
+
+        try {
+            Conexion conexion = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE email=?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                u = new Usuario(
+                    rs.getInt("id"), 
+                    rs.getString("username"), 
+                    rs.getString("password"), 
+                    rs.getString("nombre"), 
+                    rs.getString("apellido"), 
+                    rs.getString("email"), 
+                    rs.getInt("telefono"));                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return u;
+    };
+
+    public Usuario findById(int id){
+        Usuario u=null;
+
+        try {
+            Conexion conexion = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE email=?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                u = new Usuario(
+                    rs.getInt("id"), 
+                    rs.getString("username"), 
+                    rs.getString("password"), 
+                    rs.getString("nombre"), 
+                    rs.getString("apellido"), 
+                    rs.getString("email"), 
+                    rs.getInt("telefono"));                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return u;
     };
 
     public Usuario findByUsername(String username){
-        com.iesvdc.acceso.inventario.modelo.Usuario u = null;
+        Usuario u=null;
 
         try {
-            Conexion con = new Conexion();
-            String sql = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = con.getConnection.prepareStatement(sql);
+            Conexion conexion = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE email=?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
             ps.setString(1, username);
-
-            ResultSet rs = ps.execute();
-
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                u = new Usuario(rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getString("email"),
-                    rs.getInt("telefono"));
-
+                u = new Usuario(
+                    rs.getInt("id"), 
+                    rs.getString("username"), 
+                    rs.getString("password"), 
+                    rs.getString("nombre"), 
+                    rs.getString("apellido"), 
+                    rs.getString("email"), 
+                    rs.getInt("telefono"));                
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return u;
+
     };
 
     public Usuario findByEmail(String email){
-        com.iesvdc.acceso.inventario.modelo.Usuario u = null;
+        Usuario u=null;
 
         try {
-            Conexion con = new Conexion();
-            String sql = "SELECT * FROM usuario WHERE id = ?";
-            PreparedStatement ps = con.getConnection.prepareStatement(sql);
+            Conexion conexion = new Conexion();
+            String sql = "SELECT * FROM usuario WHERE email=?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
             ps.setString(1, email);
-
-            ResultSet rs = ps.execute();
-
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                u = new Usuario(rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("nombre"),
-                    rs.getString("apellido"),
-                    rs.getString("email"),
-                    rs.getInt("telefono"));
-
+                u = new Usuario(
+                    rs.getInt("id"), 
+                    rs.getString("username"), 
+                    rs.getString("password"), 
+                    rs.getString("nombre"), 
+                    rs.getString("apellido"), 
+                    rs.getString("email"), 
+                    rs.getInt("telefono"));                
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return u;
     };
 
 
     public Usuario update(int idOldUser, Usuario usuario){
-        
+        String sql = "UPDATE `usuario` SET " +
+        "`id`       = ?,"+
+        "`username` = ?,"+
+        "`password` = ?,"+
+        "`email`    = ?,"+
+        "`nombre`   = ?,"+
+        "`apellido` = ?,"+
+        "`telefono` = ? "+
+        "WHERE `id` = ? ";
+
+        try {
+            Conexion conexion = new Conexion();
+            PreparedStatement ps = conexion.getConnection().prepareStatement(sql);
+            ps.setInt   (1, usuario.getId());
+            ps.setString(2, usuario.getUsername());
+            ps.setString(3, usuario.getPassword());
+            ps.setString(4, usuario.getEmail());
+            ps.setString(5, usuario.getNombre());
+            ps.setString(6, usuario.getApellido());
+            ps.setInt   (7, usuario.getTelefono());
+            ps.setInt   (8, idOldUser);
+
+            if (ps.executeUpdate()==0) {
+                this.create(usuario);                
+            }
+
+        } catch (Exception e) {
+            // modo devel
+            e.printStackTrace();
+        }
+        return this.findByUsername(usuario.getUsername());
+
     };
-    public Usuario update(int idOldUser, Usuario usuario);
-    public Usuario delete(int idUsuario);
-    public Usuario delete(Usuario usuario);
+    public Usuario update(Usuario idOldUser, Usuario usuario){
+        if (usuario.equals(idOldUser)) {
+            return usuario;
+        }
+        this.update(idOldUser.getId(), usuario);//Llamo al de arriba llamando al id de OldUser
+    };
+
+    public Usuario delete(int idUsuario){
+        try{
+         String sql = "DELETE FROM usuario WHERE id = ?";
+         Usuario usu = this.findById(idUsuario);
+         if (usu != null) {
+            Conexion cone = new Conexion();
+            PreparedStatement ps = cone.getConnection().prepareStatement(sql);
+
+            if (ps.executeUpdate() == 0) {
+                return null;
+            }
+         }
+        }catch (Exception e){
+
+        }
+    };
+    public Usuario delete(Usuario usuario){
+        return this.delete(usuario.getId());
+    };
 }
