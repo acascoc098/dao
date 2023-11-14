@@ -7,43 +7,57 @@ import com.example.modelos.Usuario;
 
 public class InstalacionDao {
     /**
-     * Al insertar como el id es un AUTO_Increment, lo gestiona la BBDD
-     * @param u Usuario para añadir a la BBDD
-     * @return El mismo usuario pero con el id real
+     * Cuando insertamos un Instalacion, como el ID es un
+     * AUTO_INCREMENT (MySQL), el ID lo gestiona la BBDD.
+     * @param u El Instalacion que vamos a añadir a la BBDD.
+     * @return El mismo Instalacion pero con el ID real.
      */
-    public Instalacion create(Usuario u);
+    public Instalacion create(Instalacion u) throws DaoException;
 
     /**
      * Buscar todos. 
-     * @return devuelve una lista con todos los usuarios de la BBDD
+     * @return devuelve una lista con todos los Instalacions de la BBDD
      */
-    public List<Instalacion> findAll();
+    public List<Instalacion> findAll() throws DaoException;
     
     /**
-     * Devuelve el usuario con ID=id de la BBDD y si no está, devuelve null
-     * @param id el ID de usuario
-     * @return el usuario o NULL si no está
+     * Devuelve el Instalacion con ID=id de la BBDD y si no está, devuelve null
+     * @param id el ID de Instalacion
+     * @return el Instalacion o NULL si no está
      */
-    public Instalacion findById(int id);
+    public Instalacion findById(int id) throws DaoException;
 
     /**
-     * Devuelve el usuario con USERNAME=username de la BBDD y si no está, devuelve null.
-     * El USERNAME es único y no se puede repetir.
-     * @param username el nombre de usuario
-     * @return el usuario o NULL si lo encuentra
+     * Devuelve el Instalacion con NAME=name de la BBDD y si no está, devuelve null.
+     * El NAME es único y no se puede repetir.
+     * @param nombre el nombre de Instalacion
+     * @return el Instalacion o NULL si lo encuentra
      */
-    public Instalacion findByNombre(String nombre);
-    
+    public Instalacion findByNombre(String nombre) throws DaoException;
+        
     
     /**
      * Actualiza, si existe, si no, lo crea
      * si lo crea, el ID ¡¡cambia!! (AUTO_INCREMENT)
      * no puedo cambiar el ID
-     * @return newUser
+     * @return newInstalacion
      * */    
-    public Instalacion update(int idOldInstalacion, Instalacion newInstalacion);
-    public Instalacion update(Instalacion oldInstalacion, Instalacion newInstalacion);
+    public Instalacion update(int idOldInstalacion, Instalacion newInstalacion) throws DaoException;
+    public Instalacion update(Instalacion oldInstalacion, Instalacion newInstalacion) throws DaoException;
     
-    public Instalacion delete(int idOldInstalacion);
-    public Instalacion delete(Instalacion instalacion);
+    /**
+     * Borra una instalación si existe ese ID
+     * @param idInstalacion
+     * @return la instalación borrada si existe, null en caso contrario
+     */
+    public Instalacion delete(int idInstalacion) throws DaoException;
+
+    /**
+     * Borra una instalación si existe esa instalación
+     * @param Instalacion
+     * @return la instalación borrada si existe, null en caso contrario
+     */
+    public Instalacion delete(Instalacion Instalacion) throws DaoException;
+
+    public int count()  throws DaoException;
 }
