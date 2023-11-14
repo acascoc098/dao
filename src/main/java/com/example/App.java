@@ -1,32 +1,63 @@
+package com.example;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.example.conexion.Conexion;
+import com.example.conexion.FactoriaConexion;
+import com.example.dao.HorarioDao;
+import com.example.dao.InstalacionDao;
+import com.example.dao.ReservaDao;
+import com.example.dao.UsuarioDao;
+import com.example.daoImplementacion.HorarioDaoImpl;
+import com.example.daoImplementacion.InstalacionDaoImple;
+import com.example.daoImplementacion.ReservaDaoIml;
+import com.example.daoImplementacion.UsuarioDaoImplementacion;
+import com.example.modelos.Horario;
+import com.example.modelos.Reserva;
+import com.example.modelos.Usuario;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        try {
+        /*try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String jdbcUrl = "jdbc:mysql://localhost:33306/inventario";
             //Connection com = DriverManager.getConnection(jdbcUrl,"root", "zx76wbz7FG89k");
 
-            Conexion cone = new Conexion();
-            Connection con = cone.getConnection("");
-            if (com != null) {
+            //Conexion cone = new Conexion();
+            Connection con = FactoriaConexion.getConnection();
+            if (con != null) {
                 System.out.println("Conectado correctamente");
 
-                usuario(com);
-                estancia(com);
+                usuario(con);
+                estancia(con);
                 
             } else {
                 System.out.println("Error de conexión");
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        UsuarioDao uDao = new UsuarioDaoImplementacion();
+        InstalacionDao iDao = (InstalacionDao) new InstalacionDaoImple();
+        HorarioDao horDao = new HorarioDaoImpl();
+        ReservaDao rDao = new ReservaDaoIml();
+        //List<Usuario> lUsuarios = uDao.findAll();        
+        //System.out.println(lUsuarios);
+
+        //System.out.println("Hay "+uDao.count()+ " usuarios");
+        //System.out.println("--=== HORARIOS EN LA BASE DE DATOS ===--");
+        //System.out.println(horDao.findAll());
+        
+        Usuario u = uDao.findById(3);
+        Horario h = horDao.findById(4);
+        rDao.create(new Reserva(0, u, h, LocalDateTime.now(), LocalDate.of(0, 0, 0)));
     }
 
     public static void usuario(Connection com) throws SQLException{

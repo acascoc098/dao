@@ -66,14 +66,16 @@ public class HorarioDaoImpl implements HorarioDao{
     public Horario findById(int id) {
         String sql =  "SELECT h.id AS `idHorario`, h.hora_inicio, h.hora_fin, " +
                     "i.id AS `idInstalacion`, i.nombre, i.descripcion " +
-                    "FROM horario h, instalacion i" +
+                    "FROM horario h, instalacion i " +
                     "WHERE h.instalacion = i.id AND h.id=?";
         
         Horario horario = null;
 
         try (Connection conn = FactoriaConexion.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+            
             if(rs.next()){
                 horario = new Horario(
                     rs.getInt("idHorario"),
