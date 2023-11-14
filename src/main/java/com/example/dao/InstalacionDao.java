@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.modelos.Instalacion;
 import com.example.modelos.Usuario;
 
-public class InstalacionDao {
+public interface InstalacionDao {
     /**
      * Cuando insertamos un Instalacion, como el ID es un
      * AUTO_INCREMENT (MySQL), el ID lo gestiona la BBDD.

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.modelos.Usuario;
 
-public class UsuarioDao {
+public interface UsuarioDao {
     //el id se autogenera, por eso quiero el objeto nuevo para saber el id real
     /**
      * Al insertar como el id es un AUTO_Increment, lo gestiona la BBDD
