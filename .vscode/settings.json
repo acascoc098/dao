@@ -14,5 +14,6 @@
             "username": "root",
             "password": "zx76wbz7FG89k"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
