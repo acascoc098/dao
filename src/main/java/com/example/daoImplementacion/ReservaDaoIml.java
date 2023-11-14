@@ -12,6 +12,7 @@ import java.util.List;
 import com.example.conexion.FactoriaConexion;
 import com.example.dao.DaoException;
 import com.example.dao.ReservaDao;
+import com.example.modelos.Horario;
 import com.example.modelos.Instalacion;
 import com.example.modelos.Reserva;
 import com.example.modelos.Usuario;
@@ -372,32 +373,5 @@ public class ReservaDaoIml implements ReservaDao {
         }
         return lReservas;
     }
-
-    @Override
-    public List<Reserva> findByInstalacion(Instalacion instalacion) throws DaoException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByInstalacion'");
-    }
-
-    @Override
-    public List<Reserva> findByInstalacionAndFecha(Instalacion instalacion, LocalDate fecha) throws DaoException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByInstalacionAndFecha'");
-    }
-
-    @Override
-    public List<Reserva> findByUsuario(Usuario usuario) throws DaoException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByUsuario'");
-    }
-
-    @Override
-    public List<Reserva> findByUsuarioAndFecha(Usuario usuario, LocalDate fecha) throws DaoException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByUsuarioAndFecha'");
-    }
-
-    
-    
    
 }

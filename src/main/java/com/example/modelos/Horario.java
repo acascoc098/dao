@@ -1,3 +1,5 @@
+package com.example.modelos;
+
 import java.time.LocalTime;
 import java.util.Objects;
 
