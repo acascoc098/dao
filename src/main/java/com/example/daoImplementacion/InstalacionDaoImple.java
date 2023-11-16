@@ -9,10 +9,10 @@ import java.util.List;
 
 import com.example.conexion.FactoriaConexion;
 import com.example.dao.DaoException;
+import com.example.dao.InstalacionDao;
 import com.example.modelos.Instalacion;
-import com.example.modelos.Usuario;
 
-public class InstalacionDaoImple {
+public class InstalacionDaoImple implements InstalacionDao {
     public Instalacion create(Instalacion i){
 
         try (Connection conexion = FactoriaConexion.getConnection()) {
