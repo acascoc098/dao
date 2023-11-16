@@ -1,6 +1,9 @@
 DELIMITER ;;
 
 DROP TRIGGER `reserva_diaria`;;
+DROP TRIGGER `reserva_diaria1`;;
+DROP TRIGGER `reserva_diaria2`;;
+DROP TRIGGER `reserva_diaria3`;;
 DROP TRIGGER `reserva_semanal`;;
 DROP TRIGGER `reserva_actualizar_pasado`;;
 DROP TRIGGER `reserva_pasado`;;
@@ -14,6 +17,38 @@ BEGIN
     THEN
       SIGNAL sqlstate '45001' 
         SET message_text = 'Sólo se permite una reserva al día por usuario.'; 
+    END IF;
+END;;
+
+CREATE TRIGGER `reserva_diaria1` 
+BEFORE UPDATE ON `reserva` 
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM `reserva` WHERE `reserva`.`fecha` = NEW.`fecha` AND `reserva`.`usuario`= NEW.`usuario`) > 0 
+    THEN
+      SIGNAL sqlstate '45001' 
+        SET message_text = 'Sólo se permite una reserva al día por usuario.'; 
+    END IF;
+END;;
+
+CREATE TRIGGER `reserva_diaria2` 
+BEFORE INSERT ON `reserva` 
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM `reserva` WHERE `reserva`.`fecha` = NEW.`fecha` AND `reserva`.`horario`= NEW.`horario`) > 0 
+    THEN
+      SIGNAL sqlstate '45001'
+        SET message_text = 'Este horario ya está reservado.'
+END;;
+
+CREATE TRIGGER `reserva_diaria3` 
+BEFORE UPDATE ON `reserva` 
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM `reserva` WHERE `reserva`.`fecha` = NEW.`fecha` AND `reserva`.`horario`= NEW.`horario`) > 0 
+    THEN
+      SIGNAL sqlstate '45001' 
+        SET message_text = 'Este horario ya está reservado por otro usuario.'; 
     END IF;
 END;;
 
