@@ -1,4 +1,4 @@
-package com.iesvdc.acceso;
+package com.example;
 
 public class CargarXML {
     public static void main(String[] args) {
