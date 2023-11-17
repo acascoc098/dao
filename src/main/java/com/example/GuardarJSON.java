@@ -1,33 +1,28 @@
-package com.iesvdc.acceso;
+package com.example;
 
-
-import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
+import com.example.dao.ReservaDao;
+import com.example.dao.UsuarioDao;
+import com.example.daoImplementacion.ReservaDaoIml;
+import com.example.daoImplementacion.UsuarioDaoImplementacion;
+import com.example.modelos.LocalDateTimeTypeAdapter;
+import com.example.modelos.LocalDateTypeAdapter;
+import com.example.modelos.LocalTimeTypeAdapter;
+import com.example.modelos.Reserva;
+import com.example.modelos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.iesvdc.acceso.dao.ReservaDao;
-import com.iesvdc.acceso.dao.UsuarioDao;
-import com.iesvdc.acceso.daoimpl.ReservaDaoIml;
-import com.iesvdc.acceso.daoimpl.UsuarioDaoImpl;
-import com.iesvdc.acceso.modelos.Reserva;
-import com.iesvdc.acceso.modelos.Usuario;
-import com.iesvdc.acceso.modelos.Usuarios;
-
-
 
 public class GuardarJSON 
 {
     public static void main( String[] args )
     {
 
-        UsuarioDao uDao = new UsuarioDaoImpl();
+        UsuarioDao uDao = new UsuarioDaoImplementacion();
         List<Usuario> lUsuarios = uDao.findAll();        
 
         ReservaDao rDao = new ReservaDaoIml();
