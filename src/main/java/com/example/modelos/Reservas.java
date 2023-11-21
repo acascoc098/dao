@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Reservas {
-    @XmlElement(name="reservas")
+    @XmlElement(name="reserva")
     List<Reserva> lReservas;
 
     public Reservas() {

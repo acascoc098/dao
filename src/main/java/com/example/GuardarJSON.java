@@ -1,5 +1,7 @@
 package com.example;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,7 +32,8 @@ public class GuardarJSON
 
         
 
-        try {
+        try (PrintWriter pUusu = new PrintWriter(new File("usuarios.json"));
+            PrintWriter pReser = new PrintWriter(new File("reservas.json"))){
             // Para que salga "bonito"
             Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalTime.class, new LocalTimeTypeAdapter())
@@ -38,9 +41,13 @@ public class GuardarJSON
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
                 .setPrettyPrinting().create();
             // Gson gson = new Gson();
-            String salida = gson.toJson(lUsuarios);
-            System.out.println(salida);
-            salida = gson.toJson(lReservas);
+            //String salida = gson.toJson(lUsuarios);
+            pUusu.write(gson.toJson(lUsuarios));
+
+            /*System.out.println(salida);
+            salida = gson.toJson(lReservas);*/
+
+            pReser.write(gson.toJson(lReservas));
         } catch (Exception e) {
             e.printStackTrace();
         }
