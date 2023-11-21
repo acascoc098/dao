@@ -1,7 +1,9 @@
 package com.example.conexion;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -74,7 +76,11 @@ public class FactoriaConexion {
 
     public static boolean dropDatabase() {
         boolean solucion = true;
-        try {
+        try (FileInputStream fis = new FileInputStream("db.properties")) {
+            Properties prop = new Properties();
+            prop.load(fis);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:33306", prop);
+
             String sql = "DROP DATABASE `reservas`";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.executeUpdate();
@@ -84,5 +90,38 @@ public class FactoriaConexion {
             e.printStackTrace();
         }
         return solucion;
+    }
+
+    public static void initializeDatabase(String filename, String databasename) {
+        try (FileInputStream fis = new FileInputStream("db.properties")) {
+            Properties prop = new Properties();
+            prop.load(fis);
+            try (Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:33306/"+databasename, prop)) {
+                // Obtener el script SQL desde el archivo
+                
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+                StringBuilder scriptSql = new StringBuilder();
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    // Concatenar las líneas del script
+                    scriptSql.append(linea.trim());
+                    if (!linea.endsWith(";")) {
+                        // Si la línea no termina con ';', agrega un espacio para separar las instrucciones
+                        scriptSql.append(" ");
+                    } else {
+                        // Si la línea termina con ';', ejecuta la instrucción SQL
+                        try (Statement statement = conexion.createStatement()) {
+                            statement.executeUpdate(scriptSql.toString());
+                        }
+                        // Reinicia el StringBuilder para la próxima instrucción
+                        scriptSql.setLength(0);
+                    }
+                }
+                reader.close();
+                System.out.println("Base de datos inicializada correctamente.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

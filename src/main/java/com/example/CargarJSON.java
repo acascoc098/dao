@@ -8,8 +8,9 @@ public class CargarJSON {
         // borramos todas las tablas y disparadores
         //después procedemos a inicializar la BBDD
         FactoriaConexion.dropDatabase();
-        FactoriaConexion.createDatabase()
+        FactoriaConexion.createDatabase();
 
+        
         //Cargar el SQL de borrar la BBDD y cargarla de nuevo
     }
 }
