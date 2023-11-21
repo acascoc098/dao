@@ -24,15 +24,15 @@ public class FactoriaConexion {
 
     public static Connection getConnection() {
         try (FileInputStream fis = new FileInputStream("db.properties")) {
-            Properties prop = new Properties();
-            prop.load(fis);
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:33306", prop);
+           
+            //conn = DriverManager.getConnection("jdbc:mysql://localhost:33306", prop);
 
             if (!createDatabase()) {
                 System.out.println("--== CONEXION IMPOSIBLE ==--");
             }
 
-            conn.close();
+            Properties prop = new Properties();
+            prop.load(fis);
             conn = DriverManager.getConnection("jdbc:mysql://localhost:33306/reservas", prop);
         } catch (SQLException | ClassCastException | IOException e) {
             Logger.getLogger(FactoriaConexion.class.getName()).severe(e.getLocalizedMessage());
@@ -52,13 +52,19 @@ public class FactoriaConexion {
         }
     }    
 
-    private static boolean createDatabase() {
+    public static boolean createDatabase() {
         boolean solucion = true;
         try {
+            FileInputStream fis = new FileInputStream("db.properties");
+            Properties prop = new Properties();
+            prop.load(fis);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:33306", prop);
+
             String sql = "CREATE DATABASE IF NOT EXISTS `reservas`";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.executeUpdate();
+               solucion = ps.executeUpdate()==1;
             }
+
         } catch (Exception e) {
             solucion = false;
             e.printStackTrace();
