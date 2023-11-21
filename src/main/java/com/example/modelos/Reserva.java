@@ -4,11 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 public class Reserva {
     private int id; 
     private Usuario usuario;
     private Horario horario;
+     @XmlElement(name="fecha_hora_reserva")
+    @XmlJavaTypeAdapter(LocalDateTimeXmlAdapter.class)
     private LocalDateTime fechaHoraHecha; // fecha y hora cuando hicimos la reserva
+    @XmlElement(name="fecha_reserva")
+    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
     private LocalDate fecha; // fecha cuando tenemos reservada la instalación
 
 

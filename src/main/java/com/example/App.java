@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.io.File;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -25,7 +26,9 @@ import com.example.daoImplementacion.ReservaDaoIml;
 import com.example.daoImplementacion.UsuarioDaoImplementacion;
 import com.example.modelos.Horario;
 import com.example.modelos.Reserva;
+import com.example.modelos.Reservas;
 import com.example.modelos.Usuario;
+import com.example.modelos.Usuarios;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -67,23 +70,31 @@ public class App {
             e.printStackTrace();
         }
 
-        /*-------------------------------------*/
+        /*-----------------------------------------------------------*/
         JAXBContext jaxbContext;
         UsuarioDao uDaoo = new UsuarioDaoImplementacion();
+        ReservaDao rDaoo = new ReservaDaoIml();
 
         List<Usuario> lUsuarios = uDaoo.findAll();
         Usuarios usuarios = new Usuarios();
         usuarios.setLUsuarios(lUsuarios);
 
-        Reservas reservas = new Reservas();
+        Reservas reservas = new Reservas(rDaoo.findAll());
         
         System.out.println(usuarios);
 
         try {
+            //Usuarios
             jaxbContext = JAXBContext.newInstance(usuarios.getClass());
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(usuarios, new File("usuarios.xml"));
+
+            //Reservas
+            jaxbContext = JAXBContext.newInstance(reservas.getClass());
+            marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(usuarios, new File("reservas.xml"));
         } catch (Exception e) {
             e.printStackTrace();
         }
